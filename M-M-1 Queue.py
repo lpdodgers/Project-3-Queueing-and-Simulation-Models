@@ -17,7 +17,9 @@ def main():
     time = 0
     max_time = 500
     while time <= max_time:
-        prev = time
+        prev_time = time
+        prev_queue = queue
+        prev_utilization = utilization
         if next_arrival < next_depart:
             time = next_arrival
             if utilization == 0:
@@ -34,10 +36,10 @@ def main():
             else:
                 utilization = 0
                 next_depart = np.inf
-        if queue > 0:
-            queue_time += queue * (time - prev)
-        if utilization == 1:
-            sys_time += time - prev
+        if prev_queue > 0:
+            queue_time += queue * (time - prev_time)
+        if prev_utilization == 1:
+            sys_time += time - prev_time
 
 
 if __name__ == "__main__":
