@@ -50,8 +50,9 @@ def main():
     avg_queue_length = queue_time / max_time
     avg_utilization = util_time / max_time
     avg_sys_length = sys_time / max_time
-    avg_queue_time = 0
-    avg_sys_time = 0
+    avg_queue_time = None
+    lamb = arrivals / max_time
+    avg_sys_time = avg_sys_length / lamb
 
     print(f'Average Queue Time: {avg_queue_time}')
     print(f'Average System Time: {avg_sys_time}')
