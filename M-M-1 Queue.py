@@ -17,7 +17,8 @@ def main():
     time = 0
     max_time = 500
     arrivals = 0
-    departions = 0
+    departures = 0
+    util_time = 0
     while time <= max_time:
         arrivals += 1
         prev_time = time
@@ -44,12 +45,13 @@ def main():
             queue_time += queue * (time - prev_time)
         if prev_utilization == 1:
             sys_time += (time - prev_time) * (prev_queue + prev_utilization)
+            util_time += (time - prev_time) * prev_utilization
 
     avg_queue_length = queue_time / max_time
-    avg_utilization = sys_time / max_time
-    avg_sys_length = avg_queue_length + avg_utilization
-    avg_queue_time =
-    avg_sys_time =
+    avg_utilization = util_time / max_time
+    avg_sys_length = sys_time / max_time
+    avg_queue_time = 0
+    avg_sys_time = 0
 
     print(f'Average Queue Time: {avg_queue_time}')
     print(f'Average System Time: {avg_sys_time}')
