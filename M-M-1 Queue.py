@@ -48,7 +48,11 @@ def main():
     avg_queue_length = queue/max_time
     avg_sys_length = sys_time/max_time
     avg_utilization = util_unit / max_time
-
+    print(f'Average Queue Time: {avg_queue_time}')
+    print(f'Average System Time: {avg_sys_time}')
+    print(f'Average Queue Length: {avg_queue_length}')
+    print(f'Average System Length: {avg_sys_length}')
+    print(f'Average Utilization: {avg_utilization}')
 
 
 if __name__ == "__main__":
