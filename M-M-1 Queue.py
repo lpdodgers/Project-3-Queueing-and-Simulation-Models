@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 np.random.seed(0)
 
@@ -17,7 +16,10 @@ def main():
     sys_time = 0
     time = 0
     max_time = 500
+    arrivals = 0
+    departions = 0
     while time <= max_time:
+        arrivals += 1
         prev_time = time
         prev_queue = queue
         prev_utilization = utilization
@@ -30,6 +32,7 @@ def main():
                 queue += 1
             next_arrival = time + Get_Arrival()
         else: # Depart < Arrival
+            departions += 1
             time = next_depart
             if queue >= 1:
                 queue -= 1
@@ -41,13 +44,13 @@ def main():
             queue_time += queue * (time - prev_time)
         if prev_utilization == 1:
             sys_time += (time - prev_time) * (prev_queue + prev_utilization)
-        util_unit = prev_utilization * (time - prev_time)
 
-    avg_queue_time = queue_time / max_time
-    avg_sys_time = sys_time / max_time
-    avg_queue_length = queue/max_time
-    avg_sys_length = sys_time/max_time
-    avg_utilization = util_unit / max_time
+    avg_queue_length = queue_time / max_time
+    avg_utilization = sys_time / max_time
+    avg_sys_length = avg_queue_length + avg_utilization
+    avg_queue_time =
+    avg_sys_time =
+
     print(f'Average Queue Time: {avg_queue_time}')
     print(f'Average System Time: {avg_sys_time}')
     print(f'Average Queue Length: {avg_queue_length}')
