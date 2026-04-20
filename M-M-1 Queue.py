@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+np.random.seed(0)
 
 def Get_Arrival():
     return np.random.exponential(scale=1/3)
@@ -39,7 +40,15 @@ def main():
         if prev_queue > 0:
             queue_time += queue * (time - prev_time)
         if prev_utilization == 1:
-            sys_time += time - prev_time
+            sys_time += (time - prev_time) * (prev_queue + prev_utilization)
+        util_unit = prev_utilization * (time - prev_time)
+
+    avg_queue_time = queue_time / max_time
+    avg_sys_time = sys_time / max_time
+    avg_queue_length = queue/max_time
+    avg_sys_length = sys_time/max_time
+    avg_utilization = util_unit / max_time
+
 
 
 if __name__ == "__main__":
