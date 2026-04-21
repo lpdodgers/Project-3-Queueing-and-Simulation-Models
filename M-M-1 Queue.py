@@ -19,7 +19,7 @@ def main():
     arrivals = 0
     departures = 0
     util_time = 0
-    while time <= max_time:
+    while time <= max_time or utilization == 1:
         prev_time = time
         prev_queue = queue
         prev_utilization = utilization
