@@ -7,7 +7,7 @@ def Get_Arrival():
 def Get_Service():
     return np.random.exponential(scale=1/4)
 
-def main():
+def running():
     next_arrival = Get_Arrival()
     next_depart = np.inf
     utilization = 0
@@ -19,7 +19,7 @@ def main():
     arrivals = 0
     departures = 0
     util_time = 0
-    while time <= max_time or utilization == 1:
+    while time <= max_time:
         prev_time = time
         prev_queue = queue
         prev_utilization = utilization
@@ -54,12 +54,25 @@ def main():
     avg_queue_time = avg_queue_length / lamb
     avg_sys_time = avg_sys_length / lamb
 
-    print(f'Average Queue Time: {avg_queue_time}')
-    print(f'Average System Time: {avg_sys_time}')
-    print(f'Average Queue Length: {avg_queue_length}')
-    print(f'Average System Length: {avg_sys_length}')
-    print(f'Average Utilization: {avg_utilization}')
+    #print(f'Average Queue Time: {avg_queue_time}')
+    #print(f'Average System Time: {avg_sys_time}')
+    #print(f'Average Queue Length: {avg_queue_length}')
+    #print(f'Average System Length: {avg_sys_length}')
+    #print(f'Average Utilization: {avg_utilization}')
+    return avg_queue_time, avg_sys_time, avg_queue_length, avg_sys_length, avg_utilization
 
+def main():
+        n = int(input(f'Number of Replications: '))
+        results = []
+        for _ in range(int(n)):
+            results.append(running())
+        results = np.array(results)
+        outputs = results.mean(axis=0)
+        print(f'Average Queue Time: {outputs[0]}')
+        print(f'Average System Time: {outputs[1]}')
+        print(f'Average Queue Length: {outputs[2]}')
+        print(f'Average System Length: {outputs[3]}')
+        print(f'Average Utilization: {outputs[4]}')
 
 if __name__ == "__main__":
     main()
