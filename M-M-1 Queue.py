@@ -20,11 +20,11 @@ def main():
     departures = 0
     util_time = 0
     while time <= max_time:
-        arrivals += 1
         prev_time = time
         prev_queue = queue
         prev_utilization = utilization
         if next_arrival < next_depart:
+            arrivals += 1
             time = next_arrival
             if utilization == 0:
                 utilization = 1
@@ -33,7 +33,7 @@ def main():
                 queue += 1
             next_arrival = time + Get_Arrival()
         else: # Depart < Arrival
-            departions += 1
+            departures += 1
             time = next_depart
             if queue >= 1:
                 queue -= 1
@@ -41,17 +41,17 @@ def main():
             else:
                 utilization = 0
                 next_depart = np.inf
-        if prev_queue > 0:
-            queue_time += queue * (time - prev_time)
-        if prev_utilization == 1:
-            sys_time += (time - prev_time) * (prev_queue + prev_utilization)
-            util_time += (time - prev_time) * prev_utilization
+        queue_time += prev_queue * (time - prev_time)
+        sys_time += (time - prev_time) * (prev_queue + prev_utilization)
+        util_time += (time - prev_time) * prev_utilization
 
+    # queue_time = queue * time => (queue * time) / time = queue
     avg_queue_length = queue_time / max_time
     avg_utilization = util_time / max_time
     avg_sys_length = sys_time / max_time
-    avg_queue_time = None
+    # Using Little's Law
     lamb = arrivals / max_time
+    avg_queue_time = avg_queue_length / lamb
     avg_sys_time = avg_sys_length / lamb
 
     print(f'Average Queue Time: {avg_queue_time}')
