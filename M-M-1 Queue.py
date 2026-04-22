@@ -54,11 +54,6 @@ def running():
     avg_queue_time = avg_queue_length / lamb
     avg_sys_time = avg_sys_length / lamb
 
-    #print(f'Average Queue Time: {avg_queue_time}')
-    #print(f'Average System Time: {avg_sys_time}')
-    #print(f'Average Queue Length: {avg_queue_length}')
-    #print(f'Average System Length: {avg_sys_length}')
-    #print(f'Average Utilization: {avg_utilization}')
     return avg_queue_time, avg_sys_time, avg_queue_length, avg_sys_length, avg_utilization
 
 def CI(dat):
