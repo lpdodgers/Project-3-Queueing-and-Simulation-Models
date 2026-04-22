@@ -62,8 +62,8 @@ def CI(dat):
     sample_std = np.std(dat, ddof = 1)
     t_value = sc.t.ppf(.975, df = n-1)
     margin_of_error = t_value * (sample_std / np.sqrt(n))
-    ci = float(sample_mean - margin_of_error), float(sample_mean + margin_of_error)
-    return ci
+    ciL, ciU = float(sample_mean - margin_of_error), float(sample_mean + margin_of_error)
+    return f'{ciL:.4f}, {ciU:.4f}'
 
 def main():
         n = int(input(f'Number of Replications: '))
@@ -76,11 +76,11 @@ def main():
         #Confidence Intervals | alpha = .05 | see CI
 
         #Print
-        print(f'Average Queue Time: {outputs[0]}, CI: {CI(results[:,0])}')
-        print(f'Average System Time: {outputs[1]}, CI: {CI(results[:, 1])}')
-        print(f'Average Queue Length: {outputs[2]}, CI: {CI(results[:, 2])}')
-        print(f'Average System Length: {outputs[3]}, CI: {CI(results[:, 3])}')
-        print(f'Average Utilization: {outputs[4]}, CI: {CI(results[:, 4])}')
+        print(f'Average Queue Time: {outputs[0]:.4f}, CI: {CI(results[:,0])}')
+        print(f'Average System Time: {outputs[1]:.4f}, CI: {CI(results[:, 1])}')
+        print(f'Average Queue Length: {outputs[2]:.4f}, CI: {CI(results[:, 2])}')
+        print(f'Average System Length: {outputs[3]:.4f}, CI: {CI(results[:, 3])}')
+        print(f'Average Utilization: {outputs[4]:.4f}, CI: {CI(results[:, 4])}')
 
 
 if __name__ == "__main__":
